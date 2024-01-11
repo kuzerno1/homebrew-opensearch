@@ -7,7 +7,7 @@ class OpensearchAT25 < Formula
   
     keg_only :versioned_formula
   
-    depends_on "gradle" => :build
+    depends_on "gradle@7" => :build
     depends_on "openjdk"
   
     def install
