@@ -2,9 +2,9 @@
 
 ## How do I install these formulae?
 
-`brew install kuzerno1/opensearch/<formula>`
+`brew install kuzerno1/opensearch/opensearch@2.x`
 
-Or `brew tap kuzerno1/opensearch` and then `brew install <formula>`.
+Or `brew tap kuzerno1/opensearch` and then `brew install opensearch@2.x`.
 
 ## Documentation
 
