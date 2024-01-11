@@ -4,55 +4,55 @@ class OpensearchAT29 < Formula
   url "https://github.com/opensearch-project/OpenSearch/archive/refs/tags/2.9.0.tar.gz"
   sha256 "c8883ee8859ec3351dc49969c135cd05aa3a9b7dd7fd051ecd401cd00975dbdd"
   license "Apache-2.0"
-  
+
   keg_only :versioned_formulas
-  
+
   depends_on "gradle@7" => :build
   depends_on "openjdk"
-  
+
   def install
     platform = OS.kernel_name.downcase
     platform += "-arm64" if Hardware::CPU.arm?
     system "gradle", "-Dbuild.snapshot=false", ":distribution:archives:no-jdk-#{platform}-tar:assemble"
-    
+
     mkdir "tar" do
       # Extract the package to the tar directory
       system "tar", "--strip-components=1", "-xf",
       Dir["../distribution/archives/no-jdk-#{platform}-tar/build/distributions/opensearch-*.tar.gz"].first
-      
+
       # Install into package directory
       libexec.install "bin", "lib", "modules"
-      
+
       # Set up Opensearch for local development:
       inreplace "config/opensearch.yml" do |s|
         # 1. Give the cluster a unique name
         s.gsub!(/#\s*cluster\.name: .*/, "cluster.name: opensearch_homebrew")
-        
+
         # 2. Configure paths
         s.sub!(%r{#\s*path\.data: /path/to.+$}, "path.data: #{var}/lib/opensearch/")
         s.sub!(%r{#\s*path\.logs: /path/to.+$}, "path.logs: #{var}/log/opensearch/")
       end
-      
+
       inreplace "config/jvm.options", %r{logs/gc.log}, "#{var}/log/opensearch/gc.log"
-      
+
       # add placeholder to avoid removal of empty directory
       touch "config/jvm.options.d/.keepme"
-      
+
       # Move config files into etc
       (etc/"opensearch").install Dir["config/*"]
     end
-    
+
     inreplace libexec/"bin/opensearch-env",
     "if [ -z \"$OPENSEARCH_PATH_CONF\" ]; then OPENSEARCH_PATH_CONF=\"$OPENSEARCH_HOME\"/config; fi",
     "if [ -z \"$OPENSEARCH_PATH_CONF\" ]; then OPENSEARCH_PATH_CONF=\"#{etc}/opensearch\"; fi"
-    
+
     bin.install libexec/"bin/opensearch",
     libexec/"bin/opensearch-keystore",
     libexec/"bin/opensearch-plugin",
     libexec/"bin/opensearch-shard"
     bin.env_script_all_files(libexec/"bin", JAVA_HOME: Formula["openjdk"].opt_prefix)
   end
-  
+
   def post_install
     # Make sure runtime directories exist
     (var/"lib/opensearch").mkpath
@@ -65,7 +65,7 @@ class OpensearchAT29 < Formula
     # fix test not being able to create keystore because of sandbox permissions
     system bin/"opensearch-keystore", "create" unless (etc/"opensearch/opensearch.keystore").exist?
   end
-  
+
   def caveats
     <<~EOS
     Data:    #{var}/lib/opensearch/
@@ -74,14 +74,14 @@ class OpensearchAT29 < Formula
     Config:  #{etc}/opensearch/
     EOS
   end
-  
+
   service do
     run opt_bin/"opensearch"
     working_dir var
     log_path var/"log/opensearch.log"
     error_log_path var/"log/opensearch.log"
   end
-  
+
   test do
     port = free_port
     (testpath/"data").mkdir
@@ -94,7 +94,7 @@ class OpensearchAT29 < Formula
     sleep 60
     output = shell_output("curl -s -XGET localhost:#{port}/")
     assert_equal "opensearch", JSON.parse(output)["version"]["distribution"]
-    
+
     system "#{bin}/opensearch-plugin", "list"
   end
 end
