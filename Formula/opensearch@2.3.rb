@@ -68,10 +68,10 @@ class OpensearchAT23 < Formula
 
   def caveats
     <<~EOS
-    Data:    #{var}/lib/opensearch/
-    Logs:    #{var}/log/opensearch/opensearch_homebrew.log
+    Data: #{var}/lib/opensearch/
+    Logs: #{var}/log/opensearch/opensearch_homebrew.log
     Plugins: #{var}/opensearch/plugins/
-    Config:  #{etc}/opensearch/
+    Config: #{etc}/opensearch/
     EOS
   end
 
