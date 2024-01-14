@@ -7,13 +7,13 @@ class OpensearchAT25 < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/kuzerno1/opensearch"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "-"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "-"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "-"
-    sha256 cellar: :any_skip_relocation, sonoma:         "-"
-    sha256 cellar: :any_skip_relocation, ventura:        "-"
-    sha256 cellar: :any_skip_relocation, monterey:       "-"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "-"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, arm64_ventura:  "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, sonoma:         "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, ventura:        "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, monterey:       "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "a79fa55320126e0292b6d1b7a5225c8f5cae2c30b5d2784611eb0b71710f9bb7"
   end
 
   keg_only :versioned_formula
