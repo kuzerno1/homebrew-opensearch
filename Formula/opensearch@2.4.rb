@@ -5,6 +5,17 @@ class OpensearchAT24 < Formula
   sha256 "df87d5aac8b44aa08788394723d8d458b6bc3b0808aa5891bd9797959921c632"
   license "Apache-2.0"
 
+  bottle do
+    root_url "https://ghcr.io/v2/kuzerno1/opensearch"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "-"
+    sha256 cellar: :any_skip_relocation, arm64_ventura:  "-"
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "-"
+    sha256 cellar: :any_skip_relocation, sonoma:         "-"
+    sha256 cellar: :any_skip_relocation, ventura:        "-"
+    sha256 cellar: :any_skip_relocation, monterey:       "-"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "-"
+  end
+
   keg_only :versioned_formula
 
   depends_on "gradle@7" => :build
