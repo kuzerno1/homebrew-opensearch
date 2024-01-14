@@ -5,6 +5,17 @@ class OpensearchAT23 < Formula
   sha256 "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
   license "Apache-2.0"
 
+  bottle do
+    root_url "https://ghcr.io/v2/kuzerno1/opensearch"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, arm64_ventura:  "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, sonoma:         "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, ventura:        "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, monterey:       "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "a69d819f83420b5c0473548310051e7a79a0ef54603ab5544e3b9bd9dc2bae87"
+  end
+
   keg_only :versioned_formula
 
   depends_on "gradle@7" => :build
